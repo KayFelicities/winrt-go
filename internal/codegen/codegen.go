@@ -168,6 +168,9 @@ func (g *generator) loadCodeGenData(typeDef *winmd.TypeDef) error {
 			return err
 		}
 		f.Data.Delegates = append(f.Data.Delegates, delegate)
+
+		exportsFile := g.addFile(typeDef, "_exports")
+		exportsFile.Data.DelegateExports = append(f.Data.DelegateExports, delegate)
 	default:
 		_ = level.Info(g.logger).Log("msg", "generating class", "class", typeDef.TypeNamespace+"."+typeDef.TypeName)
 
@@ -368,7 +371,6 @@ func (g *generator) createGenClass(typeDef *winmd.TypeDef) (*genClass, error) {
 		ImplInterfaces:      implInterfaces,
 		ExclusiveInterfaces: exclusiveGenInterfaces,
 		HasEmptyConstructor: hasEmptyConstructor,
-		IsAbstract:          typeDef.Flags.Abstract(),
 	}, nil
 }
 
@@ -480,7 +482,7 @@ func (g *generator) createGenStruct(typeDef *winmd.TypeDef) (*genStruct, error) 
 	}, nil
 }
 
-// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#delegates
+//https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#delegates
 func (g *generator) createGenDelegate(typeDef *winmd.TypeDef) (*genDelegate, error) {
 	// FieldList: must be empty
 	// MethodList: An index into the MethodDef table (ECMA II.22.26), marking the first of a contiguous run of methods owned by this type.
@@ -595,14 +597,13 @@ func (g *generator) getGenFuncs(typeDef *winmd.TypeDef, requiresActivation bool)
 func (g *generator) genFuncFromMethod(typeDef *winmd.TypeDef, methodDef *types.MethodDef, exclusiveTo string, requiresActivation bool) (*genFunc, error) {
 	// add the type imports to the top of the file
 	// only if the method is going to be implemented
+	implement := g.shouldImplementMethod(methodDef)
 
-	overloadName := winmd.GetMethodOverloadName(typeDef.Ctx(), methodDef)
-	implement := g.shouldImplementMethod(overloadName)
 	if !implement {
 		// if we don't implement the method, we don't need to gather
 		// all the information, just the name of it is enough
 		return &genFunc{
-			Name:               overloadName,
+			Name:               winmd.GetMethodOverloadName(typeDef.Ctx(), methodDef),
 			RequiresImports:    nil,
 			Implement:          implement,
 			InParams:           nil,
@@ -641,7 +642,7 @@ func (g *generator) genFuncFromMethod(typeDef *winmd.TypeDef, methodDef *types.M
 	}
 
 	return &genFunc{
-		Name:               overloadName,
+		Name:               winmd.GetMethodOverloadName(typeDef.Ctx(), methodDef),
 		RequiresImports:    requiredImports,
 		Implement:          implement,
 		InParams:           params,
@@ -652,8 +653,8 @@ func (g *generator) genFuncFromMethod(typeDef *winmd.TypeDef, methodDef *types.M
 	}, nil
 }
 
-func (g *generator) shouldImplementMethod(methodName string) bool {
-	return g.methodFilter.Filter(methodName)
+func (g *generator) shouldImplementMethod(methodDef *types.MethodDef) bool {
+	return g.methodFilter.Filter(methodDef.Name)
 }
 
 func (g *generator) getInParameters(curPackage string, typeDef *winmd.TypeDef, methodDef *types.MethodDef) ([]*genParam, error) {
@@ -1156,12 +1157,6 @@ func (g *generator) Signature(typeDef *winmd.TypeDef) (string, error) {
 
 		return fmt.Sprintf(`delegate({%s})`, guid), nil
 	case typeDef.IsRuntimeClass():
-		// Static only classes carry the abstract flag.
-		// These cannot be instantiated so no signature needed.
-		if typeDef.Flags.Abstract() {
-			return "", nil
-		}
-
 		// runtime_class_signature => "rc(" runtime_class_name ";" default_interface ")"
 
 		// Runtime classes must specify the DefaultAttribute on exactly one of their InterfaceImpl rows.

@@ -14,13 +14,14 @@ type genDataFile struct {
 }
 
 type genData struct {
-	Package    string
-	Imports    []string
-	Classes    []*genClass
-	Enums      []*genEnum
-	Interfaces []*genInterface
-	Structs    []*genStruct
-	Delegates  []*genDelegate
+	Package         string
+	Imports         []string
+	Classes         []*genClass
+	Enums           []*genEnum
+	Interfaces      []*genInterface
+	Structs         []*genStruct
+	Delegates       []*genDelegate
+	DelegateExports []*genDelegate
 }
 
 func (g *genData) ComputeImports(typeDef *winmd.TypeDef) {
@@ -67,7 +68,6 @@ type genClass struct {
 	ImplInterfaces      []*genInterface
 	ExclusiveInterfaces []*genInterface
 	HasEmptyConstructor bool
-	IsAbstract          bool
 }
 
 func (g *genClass) GetRequiredImports() []*genImport {
