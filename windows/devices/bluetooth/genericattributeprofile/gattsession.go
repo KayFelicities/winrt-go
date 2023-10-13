@@ -10,8 +10,8 @@ import (
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
-	"github.com/saltosystems/winrt-go/windows/devices/bluetooth"
-	"github.com/saltosystems/winrt-go/windows/foundation"
+	"github.com/KayFelicities/winrt-go/windows/devices/bluetooth"
+	"github.com/KayFelicities/winrt-go/windows/foundation"
 )
 
 const SignatureGattSession string = "rc(Windows.Devices.Bluetooth.GenericAttributeProfile.GattSession;{d23b5143-e04e-4c24-999c-9c256f9856b1})"

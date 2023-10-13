@@ -10,8 +10,8 @@ import (
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
-	"github.com/saltosystems/winrt-go/windows/foundation"
-	"github.com/saltosystems/winrt-go/windows/storage/streams"
+	"github.com/KayFelicities/winrt-go/windows/foundation"
+	"github.com/KayFelicities/winrt-go/windows/storage/streams"
 )
 
 const SignatureGattValueChangedEventArgs string = "rc(Windows.Devices.Bluetooth.GenericAttributeProfile.GattValueChangedEventArgs;{d21bdb54-06e3-4ed8-a263-acfac8ba7313})"

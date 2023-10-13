@@ -10,9 +10,9 @@ import (
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
-	"github.com/saltosystems/winrt-go/windows/devices/bluetooth"
-	"github.com/saltosystems/winrt-go/windows/foundation"
-	"github.com/saltosystems/winrt-go/windows/storage/streams"
+	"github.com/KayFelicities/winrt-go/windows/devices/bluetooth"
+	"github.com/KayFelicities/winrt-go/windows/foundation"
+	"github.com/KayFelicities/winrt-go/windows/storage/streams"
 )
 
 const SignatureGattCharacteristic string = "rc(Windows.Devices.Bluetooth.GenericAttributeProfile.GattCharacteristic;{59cb50c1-5934-4f68-a198-eb864fa44e6b})"

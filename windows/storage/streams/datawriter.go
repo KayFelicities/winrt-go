@@ -9,7 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
-	"github.com/saltosystems/winrt-go/windows/foundation"
+	"github.com/KayFelicities/winrt-go/windows/foundation"
 )
 
 const SignatureDataWriter string = "rc(Windows.Storage.Streams.DataWriter;{64b89265-d341-4922-b38a-dd4af8808c4e})"

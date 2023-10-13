@@ -10,7 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
-	"github.com/saltosystems/winrt-go/windows/storage/streams"
+	"github.com/KayFelicities/winrt-go/windows/storage/streams"
 )
 
 const SignatureBluetoothLEManufacturerData string = "rc(Windows.Devices.Bluetooth.Advertisement.BluetoothLEManufacturerData;{912dba18-6963-4533-b061-4694dafb34e5})"

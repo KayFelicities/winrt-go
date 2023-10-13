@@ -10,7 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
-	"github.com/saltosystems/winrt-go/windows/foundation"
+	"github.com/KayFelicities/winrt-go/windows/foundation"
 )
 
 const SignatureBluetoothLEDevice string = "rc(Windows.Devices.Bluetooth.BluetoothLEDevice;{b5ee2f7b-4ad8-4642-ac48-80a0b500e887})"

@@ -10,7 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
-	"github.com/saltosystems/winrt-go/windows/storage/streams"
+	"github.com/KayFelicities/winrt-go/windows/storage/streams"
 )
 
 const SignatureGattReadResult string = "rc(Windows.Devices.Bluetooth.GenericAttributeProfile.GattReadResult;{63a66f08-1aea-4c4c-a50f-97bae474b348})"

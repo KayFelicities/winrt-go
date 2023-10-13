@@ -10,7 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
-	"github.com/saltosystems/winrt-go/windows/foundation/collections"
+	"github.com/KayFelicities/winrt-go/windows/foundation/collections"
 )
 
 const SignatureBluetoothLEAdvertisement string = "rc(Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisement;{066fb2b7-33d1-4e7d-8367-cf81d0f79653})"

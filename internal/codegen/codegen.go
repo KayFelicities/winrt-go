@@ -8,10 +8,10 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/KayFelicities/winrt-go"
+	"github.com/KayFelicities/winrt-go/internal/winmd"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
-	"github.com/saltosystems/winrt-go"
-	"github.com/saltosystems/winrt-go/internal/winmd"
 	"github.com/tdakkota/win32metadata/types"
 	"golang.org/x/tools/imports"
 )
@@ -482,7 +482,7 @@ func (g *generator) createGenStruct(typeDef *winmd.TypeDef) (*genStruct, error) 
 	}, nil
 }
 
-//https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#delegates
+// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#delegates
 func (g *generator) createGenDelegate(typeDef *winmd.TypeDef) (*genDelegate, error) {
 	// FieldList: must be empty
 	// MethodList: An index into the MethodDef table (ECMA II.22.26), marking the first of a contiguous run of methods owned by this type.
